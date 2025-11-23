@@ -1,15 +1,27 @@
+/*Izveidot BMK, realizējot darbības:
+
+    Koka saknes veidošana un izvadīšana.
+    Elementa pievienošana.
+    Elementa meklēšana.
+    Elementa dzēšana.
+    Koka izdrukāšana.
+    Koka apstaigāšana (preorder, inorder, postorder).
+    Elementu skaita noteikšana.
+    Koka pagriešana.*/
 #include<cstdlib>
-#include<iostream>
 #include"funkcijas_tree.h"
-using namespace std;
 int main(){
-    program_greatings_info();
-    int action, *selected_element;
+    programGreatingsInfo();
+    int action;
+    bool exitOrContinue=false;
     Node *head=nullptr;
-    head = CreateNode();
+    Node *tail=nullptr;
     do{
-        
-    }while(action>=1 && action<=3);
+        action=TextOutput();
+        exitOrContinue=InputProcessing(action, head, tail);
+        PrintList(head);
+        Count(head);
+    }while(exitOrContinue);
     system("pause>nul");
     return 0;
 }
