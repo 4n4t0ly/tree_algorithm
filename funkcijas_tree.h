@@ -1,67 +1,113 @@
 #include<iostream>
 #include<cstdlib>
+#include<limits>
 using namespace std;
 struct Node{
     int data;
     Node *left, *right;
 };
-int value_input(){
+int valueInput(bool forSearch){
     int value;
-    cout<<"\nEnter the value of the element: ";
+    if(forSearch)
+        cout<<"\nEnter the value of the element to search: ";
+    else
+        cout<<"\nEnter the value of the element: ";
     cin>>value;
+    if(!cin){
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     return value;
 }
-void program_greatings_info(){
+void programGreatingsInfo(){
     cout<<"\nČao kokao!\n";
     cout<<"\nŠī programma ļauj veikt šādas darbības ar kokiem:\n";
-        cout<<"\t- Elementa pievienošana;\n";
-        cout<<"\t- Elementa dzēšana;\n";
-        cout<<"\t- Saraksta izvade;\n";
-        cout<<"\t- Elementu skaita noteikšana sarakstā;\n";
-        cout<<"\t- Visa saraksta dzēšana.\n";
+        cout<<"\tKoka saknes veidošana un izvadīšana;\n";
+        cout<<"\tElementa pievienošana;\n";
+        cout<<"\tElementa meklēšana;\n";
+        cout<<"\tElementa dzēšana;\n";
+        cout<<"\tKoka izdrukāšana;\n";
+        cout<<"\tKoka apstaigāšana (preorder, inorder, postorder);\n";
+        cout<<"\tElementu skaita noteikšana;\n";
+        cout<<"\tKoka pagriešana.\n";
     cout<<"\nProgrammas autors: Anatoly Borovik 2.kursa students, 2025.g.\n";
 }
 Node *CreateNode(){
     Node *NewNode;
     NewNode=new Node;
-    int x=value_input();
+    int x=valueInput(false);
     NewNode->data=x;
-    NewNode->left=NULL;
-    NewNode->right=NULL;
+    NewNode->left=nullptr;
+    NewNode->right=nullptr;
     return NewNode;
 }
-void PrintTree(Node *root){
-    if(!root) return;
-    PrintTree(root->left);
-    cout<<root->data<<" ";
-    PrintTree(root->right);
+void PrintTree(Node *current){
+    if(!current) return;
+    PrintTree(current->left);
+    cout<<current->data<<" ";
+    PrintTree(current->right);
 }
-Node *AddNode(Node *root){
-    Node *newNode, *current;
-    newNode=CreateNode();
-    if(!root) root=newNode;
-    else{
-        current=root;
-        while(current->left!=NULL || current->right!=NULL){
-            while(current->left!=NULL && current->data > newNode->data)
-                current=current->left;
-            while(current->right!=NULL && current->data < newNode->data)
-                current=current->right;
-        }
-        if(current->left==NULL && current->data > newNode->data)
-            current->left=newNode;
-        if(current->right==NULL && current->data <= newNode->data)
-            current->right=newNode;
-    }
-    return root;
+void Inorder(Node* root){
+
 }
-void action_selection(int action, Node *root){
-    if(action==1) root=CreateNode();
-    else if(action==2) PrintTree(root);
-    else if(action==3);
-    else if(action==8) exit(0);
-    else{
-        cerr<<"\nWrong action!";
-        exit(0);
+void Preorder(Node* root){
+
+}
+void Postorder(Node* root){
+    
+}
+int Count(Node *root){
+    if(!root) return 0;
+    return 1 + Count(root->left) + Count(root->right);
+}
+int TextOutput(){
+    int action;
+    cout<<"\n1. Add Element to Tree";
+    cout<<"\n2. Search Element in Tree";
+    cout<<"\n3. Delete Element from Tree";
+    cout<<"\n4. Element Count in Tree";
+    cout<<"\n5. Exit";
+    cout<<"\nChoose an action: ";
+    cin>>action;
+    if(!cin){
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
+    return action;
+}
+void Insert(Node *&root, int value){
+    if(!root){
+        root=CreateNode();
+        root->data=value;
+        return;
+    }
+    if(value<root->data)
+        Insert(root->left,value);
+    else
+        Insert(root->right,value);
+}
+void AddElement(Node *&root){
+    int n, value;
+    cout<<"\nEnter a number of elements to add: ";
+    cin>>n;
+    if(!cin){
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return;
+    }
+    for(int i=0; i<n; i++){
+        value=valueInput(false);
+        Insert(root, value);
+    }
+}
+Node* Search(Node *root, int value){
+    if(!root || root->data==value)
+        return root;
+    if(value<root->data)
+        return Search(root->left, value);
+    else
+        return Search(root->right, value);
+}
+bool InputProcessing(int action, Node *&root){
+    return true;
 }

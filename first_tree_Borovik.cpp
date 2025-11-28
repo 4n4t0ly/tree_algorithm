@@ -14,13 +14,12 @@ int main(){
     programGreatingsInfo();
     int action;
     bool exitOrContinue=false;
-    Node *head=nullptr;
-    Node *tail=nullptr;
+    Node *root=nullptr;
     do{
         action=TextOutput();
-        exitOrContinue=InputProcessing(action, head, tail);
-        PrintList(head);
-        Count(head);
+        exitOrContinue=InputProcessing(action, root);
+        PrintTree(root);
+        Count(root);
     }while(exitOrContinue);
     system("pause>nul");
     return 0;
