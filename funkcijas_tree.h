@@ -32,10 +32,9 @@ void programGreatingsInfo(){
         cout<<"\tKoka pagriešana.\n";
     cout<<"\nProgrammas autors: Anatoly Borovik 2.kursa students, 2025.g.\n";
 }
-Node *CreateNode(){
+Node *CreateNode(int x){
     Node *NewNode;
     NewNode=new Node;
-    int x=valueInput(false);
     NewNode->data=x;
     NewNode->left=nullptr;
     NewNode->right=nullptr;
@@ -79,7 +78,7 @@ int Count(Node *root){
 }
 void Insert(Node *&root, int value){
     if(!root){
-        root=CreateNode();
+        root=CreateNode(value);
         root->data=value;
         return;
     }
@@ -87,6 +86,14 @@ void Insert(Node *&root, int value){
     Insert(root->left,value);
     else
     Insert(root->right,value);
+}
+void Visualisation(Node*root, int level=0) {
+    if(!root) return;
+    Visualisation(root->right, level+1);
+    for(int i=0; i<level; i++)
+        cout<<"    ";
+    cout<<root->data<<"\n";
+    Visualisation(root->left, level+1);
 }
 void AddElement(Node *&root){
     int n, value;
@@ -162,9 +169,10 @@ int TextOutput(){
     cout<<"\n2. Element Search in Tree";
     cout<<"\n3. Delete Element from Tree";
     cout<<"\n4. Element Count in Tree";
-    cout<<"\n5. Tree rotation";
-    cout<<"\n6. Tree walking (preorder, inorder, postorder)";
-    cout<<"\n7. Exit";
+    cout<<"\n5. Tree Visualisation";
+    cout<<"\n6. Tree rotation";
+    cout<<"\n7. Tree walking (preorder, inorder, postorder)";
+    cout<<"\n8. Exit";
     cout<<"\nChoose an action: ";
     cin>>action;
     if(!cin){
@@ -191,7 +199,9 @@ bool InputProcessing(int action, Node *&root){
         int elementsCount=Count(root);
         cout<<"\n\tNumber of elements in the tree: "<<elementsCount<<endl;
     }
-    else if(action==5){
+    else if(action==5)
+        Visualisation(root);
+    else if(action==6){
         cout<<"\n1. Rotate Right\n2. Rotate Left\nChoose rotation type: ";
         int rotationType;
         cin>>rotationType;
@@ -209,9 +219,9 @@ bool InputProcessing(int action, Node *&root){
             cout<<"\nInvalid rotation type selected!";
         return true;
     }
-    else if(action==6)
-        PrintTree(root);
     else if(action==7)
+        PrintTree(root);
+    else if(action==8)
         return false;
     else
         cout<<"\nInvalid action selected!";

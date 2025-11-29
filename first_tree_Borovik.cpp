@@ -18,8 +18,6 @@ int main(){
     do{
         action=TextOutput();
         exitOrContinue=InputProcessing(action, root);
-        PrintTree(root);
-        Count(root);
     }while(exitOrContinue);
     system("pause>nul");
     return 0;
