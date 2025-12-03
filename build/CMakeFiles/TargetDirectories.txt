@@ -1,0 +1,4 @@
+C:/University/algoritmi/class/2kurs/tree/build/CMakeFiles/app.dir
+C:/University/algoritmi/class/2kurs/tree/build/CMakeFiles/test_tree.dir
+C:/University/algoritmi/class/2kurs/tree/build/CMakeFiles/edit_cache.dir
+C:/University/algoritmi/class/2kurs/tree/build/CMakeFiles/rebuild_cache.dir
