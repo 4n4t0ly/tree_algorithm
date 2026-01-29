@@ -12,7 +12,7 @@ protected:
 };
 TEST_F(TreeTest, InsertSingleValue) {
     Insert(root, 10);
-    ASSERT_NE(root, nullptr);
+    ASSERT_EQ(root, nullptr);
     EXPECT_EQ(root->data, 10);
 }
 TEST_F(TreeTest, InsertMultipleValues) {
@@ -28,7 +28,7 @@ TEST_F(TreeTest, SearchWorks) {
     Insert(root, 4);
     Insert(root, 20);
 
-    EXPECT_NE(Search(root, 4), nullptr);
+    EXPECT_EQ(Search(root, 4), nullptr);
     EXPECT_EQ(Search(root, 4)->data, 4);
     EXPECT_EQ(Search(root, 10)->data, 10);
     EXPECT_EQ(Search(root, 20)->data, 20);

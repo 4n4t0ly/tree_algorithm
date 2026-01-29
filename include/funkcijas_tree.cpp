@@ -179,12 +179,18 @@ int TextOutput(){
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
+
     return action;
 }
 bool InputProcessing(int action, Node *&root){
     if(action==1)
         AddElement(root);
     else if(action==2){
+        if(!root){
+        
+            cout<<"\nThe tree is empty. Cannot perform search.";
+            return true;
+        }
         int value=valueInput(true);
         if(Search(root, value))
             cout<<"\nElement "<<value<<" found in the tree.";
@@ -192,16 +198,37 @@ bool InputProcessing(int action, Node *&root){
             cout<<"\nElement "<<value<<" not found in the tree.";
     }
     else if(action==3){
+        if(!root){
+        
+            cout<<"\nThe tree is empty. Cannot perform search.";
+            return true;
+        }
         int value=valueInput(false);
         root=Delete(root, value);
     }
     else if(action==4){
+        if(!root){
+        
+            cout<<"\nThe tree is empty. Cannot perform search.";
+            return true;
+        }
         int elementsCount=Count(root);
         cout<<"\n\tNumber of elements in the tree: "<<elementsCount<<endl;
     }
-    else if(action==5)
+    else if(action==5){
+        if(!root){
+        
+            cout<<"\nThe tree is empty. Cannot perform search.";
+            return true;
+        }
         Visualisation(root);
+    }
     else if(action==6){
+        if(!root){
+        
+            cout<<"\nThe tree is empty. Cannot perform search.";
+            return true;
+        }
         cout<<"\n1. Rotate Right\n2. Rotate Left\nChoose rotation type: ";
         int rotationType;
         cin>>rotationType;
@@ -219,8 +246,14 @@ bool InputProcessing(int action, Node *&root){
             cout<<"\nInvalid rotation type selected!";
         return true;
     }
-    else if(action==7)
+    else if(action==7){
+    if(!root){
+        
+            cout<<"\nThe tree is empty. Cannot perform search.";
+            return true;
+        }
         PrintTree(root);
+    }
     else if(action==8)
         return false;
     else

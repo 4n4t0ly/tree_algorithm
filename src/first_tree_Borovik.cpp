@@ -9,7 +9,7 @@
     Elementu skaita noteikšana.
     Koka pagriešana.*/
 #include<cstdlib>
-#include "../include/funkcijas_tree.h"
+#include "funkcijas_tree.h"
 int main(){
     programGreatingsInfo();
     int action;
